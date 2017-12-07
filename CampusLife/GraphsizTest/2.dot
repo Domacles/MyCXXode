@@ -1,0 +1,76 @@
+graph ER {
+	node [shape=box]; 
+		student;
+		teacher;
+		instructor;
+		president;
+		request;
+		record;
+
+	node [shape=ellipse]; 
+		{
+			node [label="name"] name_student; name_teacher; name_instructor;name_president;
+		};
+		{
+			node [label="number"] number_request; number_record; number_student; number_teacher; number_instructor;number_president;
+		};
+		grade; class;
+		requestor; reason; permission; time;
+		studentname; classtime;
+
+	node [shape=diamond,style=filled,color=lightgrey];
+		send_or_del;
+		log_or_query;
+		{
+			node [label="deal_or_query"] deal_or_query0; deal_or_query1; deal_or_query2; deal_or_query3; deal_or_query4; deal_or_query5;
+		};
+
+	student -- send_or_del [label="1"];
+	student -- log_or_query [label="1"];
+
+	teacher -- deal_or_query0 [label="1"];
+	teacher -- deal_or_query3 [label="1"];
+	
+	instructor -- deal_or_query1 [label="1"];
+	instructor -- deal_or_query4 [label="1"];
+	
+	president -- deal_or_query2 [label="1"];
+	president -- deal_or_query5 [label="1"];
+
+	send_or_del -- request [label="n"];
+	deal_or_query0 -- request [label="n"];
+	deal_or_query1 -- request [label="n"];
+	deal_or_query2 -- request [label="n"];
+
+	log_or_query -- record [label="n"];
+	deal_or_query3 -- record [label="n"];
+	deal_or_query4 -- record [label="n"];
+	deal_or_query5 -- record [label="n"];
+
+	student -- name_student;
+	student -- number_student;
+	student -- grade;
+	student -- class;
+
+	teacher -- name_teacher;
+	teacher -- number_teacher;
+
+	instructor -- name_instructor;
+	instructor -- number_instructor;
+
+	president -- name_president;
+	president -- number_president;
+
+	request -- number_request;
+	request -- requestor;
+	request -- reason;
+	request -- permission;
+	request -- time;
+
+	record -- number_record;
+	record -- studentname;
+	record -- classtime;
+
+	label = "\n\nEntity Relation Diagram";
+	fontsize=20;
+}
